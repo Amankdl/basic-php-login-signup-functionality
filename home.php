@@ -1,11 +1,16 @@
 <?php
+    session_start();
+    if(!isset($_SESSION['loggedin'])){
+        header("location: login.php");
+        exit;
+    }
     require 'elements/head.php';
     ?>
 <body>
     <?php
     require 'elements/nav.php';
     ?>
-
+    <h1>Welcome <?php echo $_SESSION['email']?> </h1>
     <?php
     require 'elements/footer.php';
     ?>

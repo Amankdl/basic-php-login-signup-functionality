@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'elements/head.php';
 ?>
 
@@ -10,7 +11,7 @@ require 'elements/head.php';
     require 'elements/dbconnect.php';
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         if (!$connection) {
             die("Connection failed : " . mysqli_connect_error());
@@ -36,15 +37,15 @@ require 'elements/head.php';
         <form action="/mysecure/signup.php" method="POST">
             <div class="mb-3">
                 <label for="uname" class="form-label">Email</label>
-                <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" onchange="confirmPass()">
+                <input required type="email" maxlength="40" class="form-control" id="email" aria-describedby="emailHelp" name="email" onchange="confirmPass()">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input required type="password" class="form-control" id="password" name="password" onchange="confirmPass()">
+                <input required type="password" maxlength="40" class="form-control" id="password" name="password" onchange="confirmPass()">
             </div>
             <div class="mb-3">
                 <label for="cpassword" class="form-label"> Confirm password</label>
-                <input required type="password" class="form-control" id="cpassword" name="cpassword" onchange="confirmPass()">
+                <input required type="password" maxlength="40" class="form-control" id="cpassword" name="cpassword" onchange="confirmPass()">
             </div>
             <button type="submit" class="btn btn-primary" id="submit" disabled>Submit</button>
         </form>
