@@ -24,7 +24,7 @@ require 'elements/head.php';
         $verified = false;
         $fetchRecord = "SELECT email, password FROM $table_name WHERE email = '".$email."'";
         $record = mysqli_query($connection, $fetchRecord);
-        if(mysqli_num_rows($record) > 0 ){
+        if(mysqli_num_rows($record) == 1 ){
             $row = mysqli_fetch_assoc($record);
             if(password_verify($password, $row['password'])){
                 $verified = true;
